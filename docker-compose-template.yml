@@ -17,9 +17,13 @@ services:
             - NodeName=
             - NodeURL=
             - RefreshInterval=60
+            - Remote=false
             - SSHServer=
             - SSHUsername=
             - SSHPassword=
             - SSHLog=
+        restart: always
         volumes:
             - ./ressources:/app
+            # If Remote is set to false
+            # mount log file to /app/[NodeName].log

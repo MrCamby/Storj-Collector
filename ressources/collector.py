@@ -32,12 +32,13 @@ def writeToDatabase(data):
 while True:
     startTime = time.time()
 
-    ## Get Logfile
-    ssh.connect(os.environ.get('SSHServer'), username=os.environ.get('SSHUsername'), password=os.environ.get('SSHPassword'))
-    scp = SCPClient(ssh.get_transport())
-    scp.get(os.environ.get('SSHLog'), os.environ.get('NodeName') + ".log")
-    scp.close()
-    ssh.close()
+    if os.environ.get("Remote").lower() == "true":
+        ## Get Logfile
+        ssh.connect(os.environ.get('SSHServer'), username=os.environ.get('SSHUsername'), password=os.environ.get('SSHPassword'))
+        scp = SCPClient(ssh.get_transport())
+        scp.get(os.environ.get('SSHLog'), os.environ.get('NodeName') + ".log")
+        scp.close()
+        ssh.close()
 
     logfile = open(os.environ.get('NodeName') + ".log", "r").read()
 
